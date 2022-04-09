@@ -26,7 +26,7 @@ app.use(router);
 
 app.listen(PORT, () => {
   Contract.on("Transfer", async (a, b, c) => {
-    const newData = await Test.insertTransferData({ sender: a, receiver: b, value: c });
+    const newData = await Test.insertTransferData({ sender: a, receiver: b, value: c.toString() });
     console.log(newData);
   })
 });
