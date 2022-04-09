@@ -19,7 +19,7 @@ class Test {
         return { ...newData.rows[0], message: "Success!" };
       } else {
         const updatedData = await pool.query("UPDATE test SET sender = $1, receiver = $2, value = $3 WHERE id = 1 RETURNING *;", [sender, receiver, value]);
-        return { updatedData, message: "Success!" };
+        return { ...updatedData.rows[0], message: "Success!" };
       }
     } catch (e) {
       console.log(e);
