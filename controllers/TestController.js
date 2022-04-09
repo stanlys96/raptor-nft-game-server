@@ -4,7 +4,7 @@ const Test = require('../models/Test');
 class TestController {
   static async getTestData() {
     try {
-      const data = await Test.getTestData();
+      const data = await Test.getTransferData();
       if (data.rowCount > 0) {
         res.status(200).json(data.rows[0]);
       }
