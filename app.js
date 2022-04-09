@@ -8,7 +8,8 @@ const Test = require('./models/Test');
 
 require("dotenv").config();
 
-const contractAddress = "0x3AcFEF594E443012371822ed507d32B807008dc7";
+// 0x61d804C9567e498d929f942d60a7Db3362834E29
+const contractAddress = "0x61d804C9567e498d929f942d60a7Db3362834E29";
 
 const provider = new ethers.providers.JsonRpcProvider(process.env.INFURA);
 
@@ -26,7 +27,7 @@ app.use(router);
 
 app.listen(PORT, () => {
   Contract.on("Transfer", async (a, b, c) => {
-    const newData = await Test.insertTestData({ sender: a, receiver: b, value: c });
+    const newData = await Test.insertTransferData({ sender: a, receiver: b, value: c });
     console.log(newData);
   })
 });
