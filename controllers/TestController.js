@@ -15,7 +15,7 @@ class TestController {
 
   static async insertTestData(req, res, next) {
     try {
-      const newData = await Test.insertTestData(req.body);
+      const newData = await Test.insertTransferData(req.body);
       res.status(200).json({ ...newData.rows[0], message: "Success" });
     } catch (err) {
       console.log(err);
