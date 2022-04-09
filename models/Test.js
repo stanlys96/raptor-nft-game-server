@@ -4,7 +4,7 @@ class Test {
   static async getTransferData() {
     try {
       const data = await pool.query("SELECT * FROM test;");
-      return data.rows;
+      return data;
     } catch (e) {
       console.log(e);
     }

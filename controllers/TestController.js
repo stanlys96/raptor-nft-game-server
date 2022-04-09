@@ -5,9 +5,7 @@ class TestController {
   static async getTestData(req, res, next) {
     try {
       const data = await Test.getTransferData();
-      if (data.rowCount > 0) {
-        res.status(200).json(data.rows[0]);
-      }
+      res.status(200).json(data.rows[0]);
     } catch (err) {
       console.log(err);
     }
