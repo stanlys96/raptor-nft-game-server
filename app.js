@@ -10,6 +10,8 @@ const gameABI = require("./gameABI.json")
 
 require("dotenv").config();
 
+const provider = new ethers.providers.JsonRpcProvider(process.env.INFURA);
+
 let private = process.env.PRIVATE
 
 let wallet = new ethers.Wallet(private, provider)
@@ -17,13 +19,11 @@ let wallet = new ethers.Wallet(private, provider)
 // 0x61d804C9567e498d929f942d60a7Db3362834E29
 const contractAddress = "0x428f2cc41C2b70E7325D78dc911669f93Ad92729";
 
-const provider = new ethers.providers.JsonRpcProvider(process.env.INFURA);
-
 const signer = new ethers.Wallet(private, provider);
 
 const InfoContract = new ethers.Contract(contractAddress, ABI, signer);
 
-const Contract = new new ethers.Contract(contractAddress, gameABI, wallet)
+const Contract = new ethers.Contract(contractAddress, gameABI, wallet)
 
 const PORT = process.env.PORT || 3000;
 
