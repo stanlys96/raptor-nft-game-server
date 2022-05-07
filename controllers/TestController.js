@@ -2,6 +2,15 @@ const res = require('express/lib/response');
 const Test = require('../models/Test');
 
 class TestController {
+  static async getCurrentQueue(req, res, next) {
+    try {
+      const data = await Test.getCurrentQueue();
+      res.status(200).json(data.rows[0]);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   static async getTestData(req, res, next) {
     try {
       const data = await Test.getTransferData();

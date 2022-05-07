@@ -3,6 +3,7 @@ const router = express.Router();
 const TestController = require('../controllers/TestController');
 
 router.get('/getAll', TestController.getTestData);
+router.get('/getCurrentQueue', TestController.getCurrentQueue)
 router.post('/', TestController.insertTestData);
 
 module.exports = router;

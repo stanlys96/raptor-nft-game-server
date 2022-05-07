@@ -1,6 +1,15 @@
 const pool = require('../database/db');
 
 class Test {
+  static async getCurrentQueue() {
+    try {
+      const data = await pool.query("SELECT * FROM current_queue;");
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   static async getTransferData() {
     try {
       const data = await pool.query("SELECT * FROM test;");

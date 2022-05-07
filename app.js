@@ -5,17 +5,25 @@ const { ethers } = require("ethers");
 const ABI = require('./ABI.json');
 const router = require('./routes');
 const Test = require('./models/Test');
+const minterABI = require("./minterABI.json")
+const gameABI = require("./gameABI.json")
 
 require("dotenv").config();
 
+let private = process.env.PRIVATE
+
+let wallet = new ethers.Wallet(private, provider)
+
 // 0x61d804C9567e498d929f942d60a7Db3362834E29
-const contractAddress = "0x61d804C9567e498d929f942d60a7Db3362834E29";
+const contractAddress = "0x428f2cc41C2b70E7325D78dc911669f93Ad92729";
 
 const provider = new ethers.providers.JsonRpcProvider(process.env.INFURA);
 
-const signer = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
+const signer = new ethers.Wallet(private, provider);
 
-const Contract = new ethers.Contract(contractAddress, ABI, signer);
+const InfoContract = new ethers.Contract(contractAddress, ABI, signer);
+
+const Contract = new new ethers.Contract(contractAddress, gameABI, wallet)
 
 const PORT = process.env.PORT || 3000;
 
@@ -26,8 +34,11 @@ app.use(cors());
 app.use(router);
 
 app.listen(PORT, () => {
-  Contract.on("Transfer", async (a, b, c) => {
-    const newData = await Test.insertTransferData({ sender: a, receiver: b, value: c.toString() });
-    console.log(newData);
-  })
+  Contract.getCurrentQueue()
+    .then((res) => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    })
 });
