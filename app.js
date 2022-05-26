@@ -48,7 +48,7 @@ app.use(router);
 // );
 
 app.listen(PORT, () => {
-  Contract.enterRaptorIntoComp(4, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  Contract.enterRaptorIntoComp(10, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
     .then((res) => {
       console.log(res);
       Contract.getCurrentQueue()
