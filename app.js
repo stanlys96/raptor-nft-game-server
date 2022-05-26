@@ -59,15 +59,15 @@ app.listen(PORT, () => {
 
   // });
 
-  Contract.raceSelect(1, { gasPrice: 35000000000, gasLimit: 1000000 })
-    .then(async (res) => {
-      await res.wait(1);
-      console.log(res);
-      console.log(res.value.toString());
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+  // Contract.raceSelect(1, { gasPrice: 35000000000, gasLimit: 1000000 })
+  //   .then(async (res) => {
+  //     await res.wait(1);
+  //     console.log(res);
+  //     console.log(res.value.toString());
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })
 
   // MinterContract.updateGameAddress(contractAddress, { gasPrice: 35000000000, gasLimit: 1000000 })
   //   .then((res) => {
@@ -87,7 +87,7 @@ app.listen(PORT, () => {
 
   Contract.on("RaceChosen", async (a) => {
     console.log(a);
-    // const asd = await Test.updateCurrentRace(a);
+    const asd = await Test.updateCurrentRace(a);
     console.log(asd);
   })
 
