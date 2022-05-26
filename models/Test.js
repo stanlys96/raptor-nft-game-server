@@ -59,8 +59,14 @@ class Test {
 
   static async updateCurrentRace(res) {
     try {
-      const data = await pool.query("INSERT INTO current_race (race_name) VALUES ('" + res + "');");
-      return data;
+      const existingData = await pool.query("SELECT * FROM current_race");
+      if (existingData.rowCount == 0) {
+        const newData = await pool.query("INSERT INTO current_race (race_name) VALUES ('$1');", [res]);
+        return { ...newData.rows[0], message: "Success!" };
+      } else {
+        const updatedData = await pool.query("UPDATE current_race SET race_name = $1 WHERE id = 1 RETURNING *;", [res]);
+        return { ...updatedData.rows[0], message: "Success!" };
+      }
     } catch (e) {
       console.log(e);
     }
