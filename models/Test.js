@@ -59,7 +59,7 @@ class Test {
 
   static async updateCurrentRace(res) {
     try {
-      const data = await pool.query("INSERT INTO current_race (race_name) values (" + res + ");");
+      const data = await pool.query("INSERT INTO current_race (race_name) VALUES ('" + res + "');");
       return data;
     } catch (e) {
       console.log(e);
