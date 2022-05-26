@@ -55,9 +55,6 @@ app.listen(PORT, () => {
   //   .catch((err) => {
   //     console.log(err);
   //   })
-  // Contract.on("QPRandomRequested", () => {
-
-  // });
 
   // Contract.raceSelect(1, { gasPrice: 35000000000, gasLimit: 1000000 })
   //   .then(async (res) => {
@@ -89,6 +86,10 @@ app.listen(PORT, () => {
     console.log(a);
     const asd = await Test.updateCurrentRace(a);
     console.log(asd);
+  })
+
+  Contract.on("QPRandomRequested", async (a) => {
+    console.log("Quick play starts!");
   })
 
 });
