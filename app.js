@@ -37,32 +37,31 @@ app.use(cors());
 
 app.use(router);
 
-// const job = new CronJob(
-//   "*/30 * * * * *",
-//   () => {
-//     console.log("A");
-//   },
-//   null,
-//   true,
-//   "Asia/Jakarta"
-// );
+const job = new CronJob(
+  "*/30 * * * * *",
+  () => {
+    Contract.getCurrentQueue()
+      .then(async (resasd)  =>  {
+        const ajsdlkajsdk = await Test.updateCurrentQueue(resasd);
+        console.log(ajsdlkajsdk);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  },
+  null,
+  true,
+  "Asia/Jakarta"
+);
 
 app.listen(PORT, () => {
-  Contract.enterRaptorIntoComp(10, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
-    .then((res) => {
-      console.log(res);
-      Contract.getCurrentQueue()
-        .then(async (resasd)  =>  {
-          const ajsdlkajsdk = await Test.updateCurrentQueue(resasd);
-          console.log(ajsdlkajsdk);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+  // Contract.enterRaptorIntoComp(10, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  //   .then((res) => {
+  //     console.log(res);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })
 
   // Contract.raceSelect(1, { gasPrice: 35000000000, gasLimit: 1000000 })
   //   .then(async (res) => {
