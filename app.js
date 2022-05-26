@@ -5,8 +5,9 @@ const { ethers } = require("ethers");
 const ABI = require('./ABI.json');
 const router = require('./routes');
 const Test = require('./models/Test');
-const minterABI = require("./minterABI.json")
-const gameABI = require("./gameABI.json")
+const minterABI = require("./minterABI.json");
+const gameABI = require("./gameABI.json");
+const CronJob = require("cron").CronJob;
 
 require("dotenv").config();
 
@@ -16,14 +17,17 @@ let private = process.env.PRIVATE
 
 let wallet = new ethers.Wallet(private, provider)
 
-// 0x61d804C9567e498d929f942d60a7Db3362834E29
-const contractAddress = "0x428f2cc41C2b70E7325D78dc911669f93Ad92729";
+const contractAddress = "0x84b9C760b375699044fe9C3A602e9FB7a522849A";
 
-const signer = new ethers.Wallet(private, provider);
+const minterAddress = "0x0bEB509f56429D1794f206913A94eB4A2318B56f";
 
-const InfoContract = new ethers.Contract(contractAddress, ABI, signer);
+// const signer = new ethers.Wallet(private, provider);
+
+const InfoContract = new ethers.Contract(contractAddress, ABI, provider);
 
 const Contract = new ethers.Contract(contractAddress, gameABI, wallet)
+
+const MinterContract = new ethers.Contract(minterAddress, minterABI, wallet);
 
 const PORT = process.env.PORT || 3000;
 
@@ -33,12 +37,58 @@ app.use(cors());
 
 app.use(router);
 
+// const job = new CronJob(
+//   "*/30 * * * * *",
+//   () => {
+//     console.log("A");
+//   },
+//   null,
+//   true,
+//   "Asia/Jakarta"
+// );
+
 app.listen(PORT, () => {
-  Contract.getCurrentQueue()
-    .then((res) => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.log(err);
-    })
+  // Contract.enterRaptorIntoQuickPlay(8, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.001") })
+  //   .then((res) => {
+  //     console.log(res);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })
+  // Contract.on("QPRandomRequested", () => {
+
+  // });
+
+  // Contract.raceSelect(1, { gasPrice: 35000000000, gasLimit: 1000000 })
+  //   .then(async (res) => {
+  //     await res.wait(1);
+  //     console.log(res);
+  //     console.log(res.value.toString());
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })
+
+  // MinterContract.updateGameAddress(contractAddress, { gasPrice: 35000000000, gasLimit: 1000000 })
+  //   .then((res) => {
+  //     console.log(res);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })
+
+  // Contract.getCurrentQueue()
+  //   .then((res) => {
+  //     console.log(res);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })
+
+  Contract.on("RaceChosen", async (a) => {
+    console.log(a);
+    const asd = await Test.updateCurrentRace(a);
+    console.log(asd);
+  })
+
 });

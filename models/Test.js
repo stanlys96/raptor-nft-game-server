@@ -10,6 +10,19 @@ class Test {
     }
   }
 
+  static async updateCurrentQueue(res) {
+    try {
+      let result = '{';
+      res.forEach((item) => {
+        result += res + ",";
+      });
+      const data = await pool.query("INSERT INTO current_queue (queue) values (ARRAY) " + res);
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   static async getTransferData() {
     try {
       const data = await pool.query("SELECT * FROM test;");
@@ -30,6 +43,24 @@ class Test {
         const updatedData = await pool.query("UPDATE test SET sender = $1, receiver = $2, value = $3 WHERE id = 1 RETURNING *;", [sender, receiver, value]);
         return { ...updatedData.rows[0], message: "Success!" };
       }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  static async getCurrentRace() {
+    try {
+      const data = await pool.query("SELECT * FROM current_race;");
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  static async updateCurrentRace(res) {
+    try {
+      const data = await pool.query("INSERT INTO current_race (current_race) values (" + res + ");");
+      return data;
     } catch (e) {
       console.log(e);
     }

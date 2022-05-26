@@ -234,6 +234,13 @@
     },
     {
       "inputs": [],
+      "name": "ResetGame",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "currentRace",
       "outputs": [
         {
