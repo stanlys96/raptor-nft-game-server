@@ -13,11 +13,21 @@ class Test {
   static async updateCurrentQueue(res) {
     try {
       let result = '{';
-      res.forEach((item) => {
-        result += res + ",";
+      res.forEach((item, i) => {
+        if (i == res.length - 1) {
+          result += item;
+        } else {
+          result += item + ",";
+        }
       });
-      const data = await pool.query("INSERT INTO current_queue (queue) values (ARRAY) " + res);
-      return data;
+      const data = await pool.query("SELECT * FROM current_queue");
+      if (data.rowCount == 0) {
+        const newData = await pool.query("INSERT INTO current_queue (queue) VALUES ('" + result + "}') RETURNING *;");
+        return { ...newData.rows[0], message: "Success!" };
+      } else {
+        const updatedData = await pool.query("UPDATE current_queue SET queue = $1 WHERE id = 1 RETURNING *;", [result]);
+        return { ...updatedData.rows[0], message: "Success!" };
+      }
     } catch (e) {
       console.log(e);
     }

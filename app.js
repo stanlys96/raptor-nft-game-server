@@ -48,13 +48,21 @@ app.use(router);
 // );
 
 app.listen(PORT, () => {
-  // Contract.enterRaptorIntoQuickPlay(8, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.001") })
-  //   .then((res) => {
-  //     console.log(res);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   })
+  Contract.enterRaptorIntoComp(7, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+    .then((res) => {
+      console.log(res);
+      Contract.getCurrentQueue()
+        .then((resasd) => {
+          const ajsdlkajsdk = await Test.updateCurrentQueue(resasd);
+          console.log(ajsdlkajsdk);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    })
+    .catch((err) => {
+      console.log(err);
+    })
 
   // Contract.raceSelect(1, { gasPrice: 35000000000, gasLimit: 1000000 })
   //   .then(async (res) => {
@@ -67,14 +75,6 @@ app.listen(PORT, () => {
   //   })
 
   // MinterContract.updateGameAddress(contractAddress, { gasPrice: 35000000000, gasLimit: 1000000 })
-  //   .then((res) => {
-  //     console.log(res);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   })
-
-  // Contract.getCurrentQueue()
   //   .then((res) => {
   //     console.log(res);
   //   })
