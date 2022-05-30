@@ -127,7 +127,7 @@ class Test {
       });
       const data = await pool.query("SELECT * FROM fighters");
       if (data.rowCount == 0) {
-        const newData = await pool.query("INSERT INTO fighters (queue) VALUES ('" + result + "') RETURNING *;");
+        const newData = await pool.query("INSERT INTO fighters (raptor_fighters) VALUES ('" + result + "') RETURNING *;");
         return { ...newData.rows[0], message: "Success!" };
       } else {
         const updatedData = await pool.query("UPDATE fighters SET raptor_fighters = $1 WHERE id = 1 RETURNING *;", [result]);

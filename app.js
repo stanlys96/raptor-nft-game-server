@@ -57,6 +57,7 @@ const job = new CronJob(
 );
 
 app.listen(PORT, () => {
+
   // Contract.raceSelect(2, { gasPrice: 35000000000, gasLimit: 1000000 })
   // .then(async (res) => {
   //   await res.wait(1);
@@ -66,9 +67,52 @@ app.listen(PORT, () => {
   // .catch((err) => {
   //   console.log(err);
   // })
-  // Contract.enterRaptorIntoComp(8, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+
+  // Contract.enterRaptorIntoComp(1, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
   //   .then((res) => {
-  //     console.log(res);
+  //       Contract.enterRaptorIntoComp(2, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  //       .then((res) => {
+  //           Contract.enterRaptorIntoComp(3, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  //           .then((res) => {
+  //               Contract.enterRaptorIntoComp(4, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  //               .then((res) => {
+  //                   Contract.enterRaptorIntoComp(5, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  //                   .then((res) => {
+  //                       Contract.enterRaptorIntoComp(6, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  //                       .then((res) => {
+  //                         Contract.enterRaptorIntoComp(8, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  //                         .then((res) => {
+  //                           Contract.enterRaptorIntoComp(22, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  //                           .then((res) => {
+  //                             console.log(res);
+  //                           })
+  //                           .catch((err) => {
+  //                             console.log(err);
+  //                           })
+  //                         })
+  //                         .catch((err) => {
+  //                           console.log(err);
+  //                         })
+  //                       })
+  //                       .catch((err) => {
+  //                         console.log(err);
+  //                       })
+  //                   })
+  //                   .catch((err) => {
+  //                     console.log(err);
+  //                   })
+  //               })
+  //               .catch((err) => {
+  //                 console.log(err);
+  //               })
+  //           })
+  //           .catch((err) => {
+  //             console.log(err);
+  //           })
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       })
   //   })
   //   .catch((err) => {
   //     console.log(err);
