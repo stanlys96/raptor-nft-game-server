@@ -55,6 +55,78 @@ class TestController {
       console.log(err);
     }
   }
+
+  static async getInjuredRaptor(req, res, next) {
+    try {
+      const data = await Test.getInjuredRaptor();
+      res.status(200).json(data.rows[0]);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async getFighters(req, res, next) {
+    try {
+      const data = await Test.getFighters();
+      res.status(200).json(data.rows[0]);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async getFightWinner(req, res, next) {
+    try {
+      const data = await Test.getFightWinner();
+      res.status(200).json(data.rows[0]);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async getTop3(req, res, next) {
+    try {
+      const data = await Test.getTop3();
+      res.status(200).json(data.rows[0]);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async getQPWinner(req, res, next) {
+    try {
+      const data = await Test.getQPWinner();
+      res.status(200).json(data.rows[0]);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async getCompWinner(req, res, next) {
+    try {
+      const data = await Test.getCompWinner();
+      res.status(200).json(data.rows[0]);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async getDRWinner(req, res, next) {
+    try {
+      const data = await Test.getDRWinner();
+      res.status(200).json(data.rows[0]);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async getRipRaptor(req, res, next) {
+    try {
+      const data = await Test.getRipRaptor();
+      res.status(200).json(data.rows[0]);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 module.exports = TestController;

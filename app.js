@@ -21,6 +21,8 @@ const contractAddress = "0x84b9C760b375699044fe9C3A602e9FB7a522849A";
 
 const minterAddress = "0x0bEB509f56429D1794f206913A94eB4A2318B56f";
 
+const myAddress = "0x1c5B16a273f65BfB580087f5250B03D64d83218F";
+
 // const signer = new ethers.Wallet(private, provider);
 
 const InfoContract = new ethers.Contract(contractAddress, ABI, provider);
@@ -41,9 +43,9 @@ const job = new CronJob(
   "*/30 * * * * *",
   () => {
     Contract.getCurrentQueue()
-      .then(async (resasd)  =>  {
-        const ajsdlkajsdk = await Test.updateCurrentQueue(resasd);
-        console.log(ajsdlkajsdk);
+      .then(async (a)  =>  {
+        const result = await Test.updateCurrentQueue(a);
+        console.log(result);
       })
       .catch((err) => {
         console.log(err);
@@ -55,7 +57,16 @@ const job = new CronJob(
 );
 
 app.listen(PORT, () => {
-  // Contract.enterRaptorIntoComp(10, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  // Contract.raceSelect(2, { gasPrice: 35000000000, gasLimit: 1000000 })
+  // .then(async (res) => {
+  //   await res.wait(1);
+  //   console.log(res);
+  //   console.log(res.value.toString());
+  // })
+  // .catch((err) => {
+  //   console.log(err);
+  // })
+  // Contract.enterRaptorIntoComp(8, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
   //   .then((res) => {
   //     console.log(res);
   //   })
@@ -63,14 +74,12 @@ app.listen(PORT, () => {
   //     console.log(err);
   //   })
 
-  // Contract.raceSelect(1, { gasPrice: 35000000000, gasLimit: 1000000 })
-  //   .then(async (res) => {
-  //     await res.wait(1);
+  // MinterContract.walletOfOwner(myAddress)
+  //   .then((res) => {
   //     console.log(res);
-  //     console.log(res.value.toString());
   //   })
-  //   .catch((err) => {
-  //     console.log(err);
+  //   .catch((res) => {
+  //     console.log(res);
   //   })
 
   // MinterContract.updateGameAddress(contractAddress, { gasPrice: 35000000000, gasLimit: 1000000 })
@@ -90,5 +99,61 @@ app.listen(PORT, () => {
   Contract.on("QPRandomRequested", async (a) => {
     console.log("Quick play starts!");
   })
+
+  Contract.on("CompRandomRequested", async (a) => {
+    console.log("COMP RANDOM REQUESTED");
+  })
+
+  Contract.on("DRRandomRequested", async (a) => {
+    console.log("DR RANDOM REQUESTED");
+  })
+
+  Contract.on("InjuredRaptor", async (a) => {
+    console.log(a);
+    const result = await Test.updateInjuredRaptor(parseInt(a));
+    console.log(result);
+  })
+
+  Contract.on("FightWinner", async (a) => {
+    console.log(a);
+    const result = await Test.updateFightWinner(parseInt(a));
+    console.log(result);
+  })
+
+  Contract.on("Fighters", async (a) => {
+    console.log(a);
+    const result = await Test.updateFighters(a);
+    console.log(result);
+  })
+
+  Contract.on("Top3", async (a) => {
+    console.log(a);
+    const result = await Test.updateTop3(a);
+    console.log(result);
+  })
+
+  Contract.on("QuickPlayRaceWinner", async (a) => {
+    console.log(a);
+    const result = await Test.updateQPWinner(parseInt(a));
+    console.log(result);
+  })
+
+  Contract.on("CompetitiveRaceWinner", async (a) => {
+    console.log(a);
+    const result = await Test.updateCompWinner(parseInt(a));
+    console.log(result);
+  })
+
+  Contract.on("DeathRaceWinner", async (a) => {
+    console.log(a);
+    const result = await Test.updateDRWinner(parseInt(a));
+    console.log(result);
+  })
+
+  Contract.on("RipRaptor", async (a) => {
+    console.log(a);
+    const result = await Test.updateRipRaptor(parseInt(a));
+    console.log(result);
+  });
 
 });
