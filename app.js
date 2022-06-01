@@ -58,7 +58,7 @@ const job = new CronJob(
 
 app.listen(PORT, () => {
 
-  // Contract.raceSelect(2, { gasPrice: 35000000000, gasLimit: 1000000 })
+  // Contract.raceSelect(1, { gasPrice: 35000000000, gasLimit: 1000000 })
   // .then(async (res) => {
   //   await res.wait(1);
   //   console.log(res);
@@ -68,27 +68,27 @@ app.listen(PORT, () => {
   //   console.log(err);
   // })
 
-  // Contract.enterRaptorIntoComp(1, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  // Contract.enterRaptorIntoDR(1, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.025") })
   //   .then((res) => {
-  //       Contract.enterRaptorIntoComp(2, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  //       Contract.enterRaptorIntoDR(2, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.025") })
   //       .then((res) => {
-  //           Contract.enterRaptorIntoComp(3, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  //           Contract.enterRaptorIntoDR(3, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.025") })
   //           .then((res) => {
-  //               Contract.enterRaptorIntoComp(4, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  //               Contract.enterRaptorIntoDR(4, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.025") })
   //               .then((res) => {
-  //                   Contract.enterRaptorIntoComp(5, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  //                   Contract.enterRaptorIntoDR(5, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.025") })
   //                   .then((res) => {
-  //                       Contract.enterRaptorIntoComp(6, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  //                       Contract.enterRaptorIntoDR(6, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.025") })
   //                       .then((res) => {
-  //                         Contract.enterRaptorIntoComp(8, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
+  //                         Contract.enterRaptorIntoDR(8, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.025") })
   //                         .then((res) => {
-  //                           Contract.enterRaptorIntoComp(22, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.005") })
-  //                           .then((res) => {
-  //                             console.log(res);
-  //                           })
-  //                           .catch((err) => {
-  //                             console.log(err);
-  //                           })
+                            // Contract.enterRaptorIntoQuickPlay(8, { gasPrice: 35000000000, gasLimit: 1000000, value: ethers.utils.parseEther("0.001") })
+                            // .then((res) => {
+                            //   console.log(res);
+                            // })
+                            // .catch((err) => {
+                            //   console.log(err);
+                            // })
   //                         })
   //                         .catch((err) => {
   //                           console.log(err);
@@ -135,9 +135,18 @@ app.listen(PORT, () => {
   //   })
 
   Contract.on("RaceChosen", async (a) => {
+    console.log("RACE CHOSEN");
     console.log(a);
-    const asd = await Test.updateCurrentRace(a);
-    console.log(asd);
+    const b = await Test.updateCurrentRace(a);
+    console.log(b);
+    const c = await Test.updateInjuredRaptor(0);
+    const d = await Test.updateFightWinner(0);
+    const e = await Test.updateFighters([0, 0]);
+    const f = await Test.updateTop3([0, 0, 0]);
+    const g = await Test.updateQPWinner(0);
+    const h = await Test.updateCompWinner(0);
+    const i = await Test.updateDRWinner(0);
+    const j = await Test.updateRipRaptor(0);
   })
 
   Contract.on("QPRandomRequested", async (a) => {
@@ -153,49 +162,59 @@ app.listen(PORT, () => {
   })
 
   Contract.on("InjuredRaptor", async (a) => {
+    console.log("INJURED RAPTOR");
     console.log(a);
     const result = await Test.updateInjuredRaptor(parseInt(a));
     console.log(result);
+    const b = await Test.updateCurrentRace("None");
   })
 
   Contract.on("FightWinner", async (a) => {
+    console.log("FIGHT WINNER");
     console.log(a);
     const result = await Test.updateFightWinner(parseInt(a));
     console.log(result);
   })
 
   Contract.on("Fighters", async (a) => {
+    console.log("FIGHTERS");
     console.log(a);
     const result = await Test.updateFighters(a);
     console.log(result);
   })
 
   Contract.on("Top3", async (a) => {
+    console.log("TOP 3");
     console.log(a);
     const result = await Test.updateTop3(a);
     console.log(result);
   })
 
   Contract.on("QuickPlayRaceWinner", async (a) => {
+    console.log("QUICK PLAY WINNER");
     console.log(a);
     const result = await Test.updateQPWinner(parseInt(a));
     console.log(result);
   })
 
   Contract.on("CompetitiveRaceWinner", async (a) => {
+    console.log("COMPETITIVE WINNER");
     console.log(a);
     const result = await Test.updateCompWinner(parseInt(a));
     console.log(result);
   })
 
   Contract.on("DeathRaceWinner", async (a) => {
+    console.log("DEATH RACE WINNER");
     console.log(a);
     const result = await Test.updateDRWinner(parseInt(a));
     console.log(result);
   })
 
   Contract.on("RipRaptor", async (a) => {
+    console.log("RIP RAPTOR");
     console.log(a);
+    const b = await Test.updateCurrentRace("None");
     const result = await Test.updateRipRaptor(parseInt(a));
     console.log(result);
   });
